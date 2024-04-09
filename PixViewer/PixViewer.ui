@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>PixViewer</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="PixViewer.qrc">
+    <normaloff>:/PixViewer/resources/像素风_图片.svg</normaloff>:/PixViewer/resources/像素风_图片.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
@@ -37,8 +41,21 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_shot"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_shot">
+   <property name="icon">
+    <iconset resource="PixViewer.qrc">
+     <normaloff>:/PixViewer/resources/shot.svg</normaloff>:/PixViewer/resources/shot.svg</iconset>
+   </property>
+   <property name="text">
+    <string>截图</string>
+   </property>
+   <property name="toolTip">
+    <string>截取ROI</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
