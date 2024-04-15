@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1164</width>
-    <height>910</height>
+    <width>1411</width>
+    <height>990</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,342 @@
   <widget class="QWidget" name="centralWidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <widget class="QWidget" name="widget" native="true"/>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="page">
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QWidget" name="widget" native="true"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_2">
+       <layout class="QGridLayout" name="gridLayout" rowstretch="1,3,1" columnstretch="7,2,7">
+        <item row="0" column="0">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>201</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="1">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>201</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="2">
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>201</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="styleSheet">
+           <string notr="true">QGroupBox#groupBox {
+    border: 2px solid;
+	border-color: rgb(221, 117, 161);
+}
+</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QWidget" name="widget_ref" native="true"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="styleSheet">
+           <string notr="true">QGroupBox#groupBox_3 {
+    border: 0px solid;
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="bt_open1">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#bt_open1{
+background-color: rgb(221,117,161);
+border:1px solid red;
+border-color: rgb(221,117,161);
+color:rgb(255, 255, 255);
+}</string>
+             </property>
+             <property name="text">
+              <string>打开图片1</string>
+             </property>
+             <property name="icon">
+              <iconset resource="PixViewer.qrc">
+               <normaloff>:/PixViewer/resources/add.svg</normaloff>:/PixViewer/resources/add.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>36</width>
+               <height>36</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="bt_open2">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#bt_open2{
+background-color: rgb(1,39,119);
+border:1px solid red;
+border-color: rgb(1,39,119);
+color:rgb(255, 255, 255);
+}</string>
+             </property>
+             <property name="text">
+              <string>打开图片2</string>
+             </property>
+             <property name="icon">
+              <iconset resource="PixViewer.qrc">
+               <normaloff>:/PixViewer/resources/add.svg</normaloff>:/PixViewer/resources/add.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>36</width>
+               <height>36</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="bt_sync">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#bt_sync{
+background-color: rgb(221,117,161);
+border:1px solid red;
+border-color: rgb(221,117,161);
+color:rgb(255, 255, 255);
+}</string>
+             </property>
+             <property name="text">
+              <string> 同步模式</string>
+             </property>
+             <property name="icon">
+              <iconset resource="PixViewer.qrc">
+               <normaloff>:/PixViewer/resources/sync.svg</normaloff>:/PixViewer/resources/sync.svg</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>30</width>
+               <height>30</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="bt_back">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>45</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>10</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QPushButton#bt_back{
+background-color: rgb(1,39,119);
+border:1px solid red;
+border-color: rgb(1,39,119);
+color:rgb(255, 255, 255);
+}</string>
+             </property>
+             <property name="text">
+              <string>   返回</string>
+             </property>
+             <property name="icon">
+              <iconset resource="PixViewer.qrc">
+               <normaloff>:/PixViewer/resources/back.svg</normaloff>:/PixViewer/resources/back.svg</iconset>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="verticalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>249</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="styleSheet">
+           <string notr="true">QGroupBox#groupBox_2 {
+    border: 2px solid;
+	border-color: rgb(1, 39, 119);
+}</string>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QWidget" name="widget_cmp" native="true"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>201</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="1">
+         <spacer name="verticalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>201</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="2">
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>201</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -29,10 +364,33 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1164</width>
+     <width>1411</width>
      <height>29</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>文件</string>
+    </property>
+    <addaction name="action_open"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="action_about"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>功能</string>
+    </property>
+    <addaction name="action_shot"/>
+    <addaction name="action_cmp"/>
+    <addaction name="action_center"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_3"/>
+   <addaction name="menu_2"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -41,9 +399,34 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="action_open"/>
+   <addaction name="action_center"/>
    <addaction name="action_shot"/>
+   <addaction name="action_cmp"/>
+   <addaction name="action_about"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_open">
+   <property name="icon">
+    <iconset resource="PixViewer.qrc">
+     <normaloff>:/PixViewer/resources/pic_file.svg</normaloff>:/PixViewer/resources/pic_file.svg</iconset>
+   </property>
+   <property name="text">
+    <string>打开</string>
+   </property>
+   <property name="whatsThis">
+    <string>打开图片</string>
+   </property>
+  </action>
+  <action name="action_about">
+   <property name="icon">
+    <iconset resource="PixViewer.qrc">
+     <normaloff>:/PixViewer/resources/about.svg</normaloff>:/PixViewer/resources/about.svg</iconset>
+   </property>
+   <property name="text">
+    <string>关于</string>
+   </property>
+  </action>
   <action name="action_shot">
    <property name="icon">
     <iconset resource="PixViewer.qrc">
@@ -52,8 +435,23 @@
    <property name="text">
     <string>截图</string>
    </property>
-   <property name="toolTip">
-    <string>截取ROI</string>
+  </action>
+  <action name="action_cmp">
+   <property name="icon">
+    <iconset resource="PixViewer.qrc">
+     <normaloff>:/PixViewer/resources/cmp.svg</normaloff>:/PixViewer/resources/cmp.svg</iconset>
+   </property>
+   <property name="text">
+    <string>对比</string>
+   </property>
+  </action>
+  <action name="action_center">
+   <property name="icon">
+    <iconset resource="PixViewer.qrc">
+     <normaloff>:/PixViewer/resources/center_pic.svg</normaloff>:/PixViewer/resources/center_pic.svg</iconset>
+   </property>
+   <property name="text">
+    <string>居中</string>
    </property>
   </action>
  </widget>

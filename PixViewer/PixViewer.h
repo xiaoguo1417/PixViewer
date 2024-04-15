@@ -28,13 +28,13 @@ private:
     enum ADJ_TYPE//左键按住时调整的分类
     {
         ADJ_SLID,                           // 滑动获取初始区域，默认
-        ADJ_NOSCALE,                        // 整体平移，无缩放操作
+        ADJ_MOVE,                           // 整体平移，无缩放操作
         ADJ_LEFTTOP,                        // 左上角缩放
         ADJ_LEFTBOTTOM,                     // 左下角缩放
         ADJ_RIGTHTOP,                       // 右上角缩放
         ADJ_RIGHTBOTTOM,                    // 右下角缩放
-        ADJ_MIDUP,                          // 上中角缩放
-        ADJ_MIDBELLOW,                      // 下中缩放
+        ADJ_MIDTOP,                         // 上中角缩放
+        ADJ_MIDBOTTOM,                      // 下中缩放
         ADJ_MIDLEFT,                        // 左中角缩放
         ADJ_MIDRIGHT                        // 右中角缩放
     };
@@ -72,6 +72,9 @@ private:
     bool m_buttonMiddlePressed;
 
     //截图相关
+    void AdjSelectionRect(QPointF mousePos);
+    void AdjControlRect();
+
     ImageShot* m_shot = new ImageShot();
     QPointF ltPoint;        //ROI左上角点，图像坐标系
     QPointF rbPoint;        //ROI右下角点
@@ -81,10 +84,48 @@ private:
     QRectF m_wSelection;    //widget坐标系
     ADJ_TYPE leftButtonType;//左键按下调整的类型
 
+    //对比相关
+    void PaintEvent(QWidget* widget, QPointF basePt, qreal scale, QImage img);
+    void RefPaintEvent();
+    void CmpPaintEvent();
+    void RefMouseMoveEvent(QMouseEvent* event);
+    void CmpMouseMoveEvent(QMouseEvent* event);
+    void RefWheelMoveEvent(QWheelEvent* event);
+    void CmpWheelMoveEvent(QWheelEvent* event);
+    void ImgAdaptView(QImage img, QWidget* widget);//调整图片所在位置
+    QTransform getTransform(QPointF basePt, qreal scale);
+    QPointF worldToScreen(QPointF pt, QPointF basePt, qreal scale);
+    QPointF screenToWorld(QPointF pt, QPointF basePt, qreal scale);
+    QVector<QLineF> getPixelBoundary(QRect rect, QPointF basePt, qreal scale);
+
+    bool isCmping;
+    bool isSyncing;//同步模式
+    qreal ref_scale;//参考图像及对比图像的放大倍数及坐标点
+    qreal cmp_scale;
+    QPointF ref_basePt;
+    QPointF cmp_basePt;
+    QImage ref_img;
+    QImage cmp_img;
+    int cmp_ch;//图片通道数量
+    int ref_ch;
+
+    //矩形区域
+    QRectF lt_ControlRect;
+    QRectF mt_ControlRect;
+    QRectF rt_ControlRect;
+    QRectF lb_ControlRect;
+    QRectF mb_ControlRect;
+    QRectF rb_ControlRect;
+    QRectF lm_ControlRect;
+    QRectF rm_ControlRect;
+
 private slots:
     void shot();
     void endShotting();
     void savePicture();
     void resetShot();
     void modifyShot(QRect rect);
+
+    void cmp();
+    void switchSyncMode();
 };

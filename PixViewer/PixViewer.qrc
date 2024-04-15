@@ -2,8 +2,14 @@
     <qresource prefix="/PixViewer">
         <file>resources/add_picture.svg</file>
         <file>resources/down_picture.svg</file>
-        <file>resources/pix_pic.svg</file>
         <file>resources/像素风_图片.svg</file>
         <file>resources/shot.svg</file>
+        <file>resources/cmp.svg</file>
+        <file>resources/about.svg</file>
+        <file>resources/pic_file.svg</file>
+        <file>resources/center_pic.svg</file>
+        <file>resources/sync.svg</file>
+        <file>resources/add.svg</file>
+        <file>resources/back.svg</file>
     </qresource>
 </RCC>
