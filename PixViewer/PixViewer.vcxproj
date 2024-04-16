@@ -90,15 +90,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="PixViewer.qrc" />
+    <QtUic Include="About.ui" />
     <QtUic Include="ImageShot.ui" />
     <QtUic Include="PixViewer.ui" />
     <QtMoc Include="PixViewer.h" />
+    <ClCompile Include="About.cpp" />
     <ClCompile Include="ImageShot.cpp" />
     <ClCompile Include="PixViewer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ImageShot.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="About.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

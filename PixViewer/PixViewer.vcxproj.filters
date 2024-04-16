@@ -43,14 +43,23 @@
     <ClCompile Include="ImageShot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="About.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="ImageShot.ui">
       <Filter>Form Files</Filter>
     </QtUic>
+    <QtUic Include="About.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="ImageShot.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="About.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

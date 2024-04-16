@@ -6,8 +6,10 @@
 #include <QLabel>
 #include <QDebug>
 #include <QFileDialog>
+#include <QMessageBox>
 #include "ui_PixViewer.h"
 #include "ImageShot.h"
+#include "About.h"
 
 class PixViewer : public QMainWindow
 {
@@ -46,6 +48,7 @@ private:
     QPointF screenToWorld(QPointF pt);
     void InitViewer();
     void ImgAdaptView();
+    void InitStatusBar();
 
     Ui::PixViewerClass ui;
     QImage m_img;//È«¾ÖÍ¼Æ¬
@@ -120,6 +123,8 @@ private:
     QRectF rm_ControlRect;
 
 private slots:
+    void OpenPic();
+
     void shot();
     void endShotting();
     void savePicture();
@@ -128,4 +133,7 @@ private slots:
 
     void cmp();
     void switchSyncMode();
+    void OnBtBackClicked();
+    void OnBtOpen1Clicked();
+    void OnBtOpen2Clicked();
 };

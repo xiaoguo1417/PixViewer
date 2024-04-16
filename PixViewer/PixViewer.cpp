@@ -8,7 +8,12 @@ PixViewer::PixViewer(QWidget *parent)
 	this->show();
 	this->hide();
 
+	filename = "lena.bmp";
 	InitViewer();
+	InitStatusBar();
+
+	connect(ui.action_open, &QAction::triggered, this, &PixViewer::OpenPic);
+	connect(ui.action_center, &QAction::triggered, this, &PixViewer::InitViewer);
 
 	setMouseTracking(true);//实现mouseMoveEvent
 	ui.centralWidget->setMouseTracking(true);
@@ -33,6 +38,11 @@ PixViewer::PixViewer(QWidget *parent)
 	ui.widget_cmp->setMouseTracking(true);
 	connect(ui.action_cmp, &QAction::triggered, this, &PixViewer::cmp);
 	connect(ui.bt_sync, &QPushButton::clicked, this, &PixViewer::switchSyncMode);
+	connect(ui.bt_back, &QPushButton::clicked, this, &PixViewer::OnBtBackClicked);
+	connect(ui.bt_open1, &QPushButton::clicked, this, &PixViewer::OnBtOpen1Clicked);
+	connect(ui.bt_open2, &QPushButton::clicked, this, &PixViewer::OnBtOpen2Clicked);
+
+	connect(ui.action_about, &QAction::triggered, this, []() {About* about = new About; about->show(); });
 }
 
 PixViewer::~PixViewer()
@@ -49,30 +59,11 @@ void PixViewer::InitViewer()
 	isCmping = false;
 	isSyncing = true;
 
-	filename = "lena.bmp";
 	m_img.load(filename);
 	if (m_img.format() == QImage::Format_Mono || m_img.format() == QImage::Format_Indexed8) m_ch = 1;
 	else m_ch = 3;
 
 	ImgAdaptView();
-
-	//状态栏初始化
-	sizeLabel = new QLabel("size", this);
-	versionLabel = new QLabel("size", this);
-	posLabel = new QLabel("pos", this);
-	scaleLabel = new QLabel(QString::number(m_scale * 100) + "%", this);
-	sizeLabel->setMinimumSize(150, 20);
-	posLabel->setMinimumSize(300, 20);
-	scaleLabel->setMinimumSize(150, 20);
-	sizeLabel->setAlignment(Qt::AlignCenter);
-	posLabel->setAlignment(Qt::AlignCenter);
-	scaleLabel->setAlignment(Qt::AlignCenter);	
-	versionLabel->setText("v2.0.0 (Apr 7 2024)");//版本信息
-
-	ui.statusBar->addPermanentWidget(versionLabel);
-	ui.statusBar->addWidget(posLabel);
-	ui.statusBar->addWidget(scaleLabel);
-	ui.statusBar->addWidget(sizeLabel);
 
 	bgColor = QColor(240, 240, 240);
 
@@ -100,6 +91,40 @@ void PixViewer::ImgAdaptView()
 	m_scaleBasePt = QPoint(x, y);
 	m_scale = s;
 	repaint();
+}
+
+void PixViewer::InitStatusBar()
+{
+	//状态栏初始化
+	sizeLabel = new QLabel("size", this);
+	versionLabel = new QLabel("size", this);
+	posLabel = new QLabel("pos", this);
+	scaleLabel = new QLabel(QString::number(m_scale * 100) + "%", this);
+	sizeLabel->setMinimumSize(150, 20);
+	posLabel->setMinimumSize(300, 20);
+	scaleLabel->setMinimumSize(150, 20);
+	sizeLabel->setAlignment(Qt::AlignCenter);
+	posLabel->setAlignment(Qt::AlignCenter);
+	scaleLabel->setAlignment(Qt::AlignCenter);
+	versionLabel->setText("v2.0.0 (Apr 7 2024)");//版本信息
+
+	ui.statusBar->addPermanentWidget(versionLabel);
+	ui.statusBar->addWidget(posLabel);
+	ui.statusBar->addWidget(scaleLabel);
+	ui.statusBar->addWidget(sizeLabel);
+}
+
+void PixViewer::OpenPic()
+{
+	filename = QFileDialog::getOpenFileName(this,
+		QString::fromLocal8Bit("打开图片"), "",
+		tr("Images (*.png *.bmp *.jpg *.jpeg *.tif )"));//可打开的文件类型
+	if (!filename.isEmpty()) {
+		m_img.load(filename);
+		if (m_img.format() == QImage::Format_Mono || m_img.format() == QImage::Format_Indexed8 || m_img.format() == QImage::Format_Grayscale8) m_ch = 1;
+		else m_ch = 3;
+		InitViewer();
+	}
 }
 
 bool PixViewer::eventFilter(QObject* watched, QEvent* event)
@@ -658,7 +683,7 @@ void PixViewer::PaintEvent(QWidget* widget, QPointF basePt, qreal scale, QImage 
 
 		for (int y = rectInView.y(); y < rectInView.y() + rectInView.height(); ++y) {
 			for (int x = rectInView.x(); x < rectInView.x() + rectInView.width(); ++x) {
-				QRgb pixValue = m_img.pixel(x, y);
+				QRgb pixValue = img.pixel(x, y);
 				QPointF pointOnScreen = worldToScreen(QPointF(x + 0.5, y + 0.5), basePt, scale);
 				pointsOnScreen.push_back(pointOnScreen);
 				if (m_ch == 1) valueString.push_back(QString::number(qGray(pixValue)));
@@ -801,6 +826,8 @@ void PixViewer::CmpWheelMoveEvent(QWheelEvent* event)
 
 void PixViewer::ImgAdaptView(QImage img, QWidget* widget)
 {
+	isSyncing = true;
+
 	int iw = img.width();
 	int ih = img.height();
 	int w = widget->width();
@@ -812,6 +839,10 @@ void PixViewer::ImgAdaptView(QImage img, QWidget* widget)
 	//计算左上角点在widget中坐标
 	int x = w / 2 - (iw * s) / 2;
 	int y = h / 2 - (ih * s) / 2;
+
+	if (ref_img.format() == QImage::Format_Mono || ref_img.format() == QImage::Format_Indexed8) ref_ch = 1;
+	else ref_ch = 3;
+	cmp_ch = 3;
 
 	ref_basePt = QPoint(x, y);
 	ref_scale = s;
@@ -887,5 +918,47 @@ void PixViewer::switchSyncMode()
 		cmp_basePt = ref_basePt;
 		cmp_scale = ref_scale;
 		repaint();
+	}
+}
+
+void PixViewer::OnBtBackClicked()
+{
+	InitViewer();
+}
+
+void PixViewer::OnBtOpen1Clicked()
+{
+	QString ref_filename = QFileDialog::getOpenFileName(this,
+		QString::fromLocal8Bit("打开图片"), "",
+		tr("Images (*.png *.bmp *.jpg *.jpeg *.tif )"));//可打开的文件类型
+	if (!ref_filename.isEmpty()) {
+		ref_img.load(ref_filename);
+		if (ref_img.format() == QImage::Format_Mono || ref_img.format() == QImage::Format_Indexed8) ref_ch = 1;
+		else ref_ch = 3;
+		if (ref_img.width() != cmp_img.width() || ref_img.height() != cmp_img.height() || ref_ch != cmp_ch) {
+			QMessageBox::StandardButton result = QMessageBox::critical(this, QString::fromLocal8Bit("警告"), 
+				QString::fromLocal8Bit("图片尺寸不一致！"));
+			return;
+		}
+		ImgAdaptView(ref_img, ui.widget_ref);
+	}
+}
+
+void PixViewer::OnBtOpen2Clicked()
+{
+	QString cmp_filename = QFileDialog::getOpenFileName(this,
+		QString::fromLocal8Bit("打开图片"), "",
+		tr("Images (*.png *.bmp *.jpg *.jpeg *.tif )"));//可打开的文件类型
+	if (!cmp_filename.isEmpty()) {
+		cmp_img.load(cmp_filename);
+		auto a = cmp_img.format();
+		if (cmp_img.format() == QImage::Format_Mono || cmp_img.format() == QImage::Format_Indexed8 || cmp_img.format() == QImage::Format_Grayscale8) cmp_ch = 1;
+		else cmp_ch = 3;
+		if (ref_img.width() != cmp_img.width() || ref_img.height() != cmp_img.height() || ref_ch != cmp_ch) {
+			QMessageBox::StandardButton result = QMessageBox::critical(this, QString::fromLocal8Bit("警告"),
+				QString::fromLocal8Bit("图片尺寸不一致！"));
+			return;
+		}
+		ImgAdaptView(ref_img, ui.widget_ref);
 	}
 }
