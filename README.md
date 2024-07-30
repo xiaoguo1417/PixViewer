@@ -1,6 +1,7 @@
 # PixViewer V2.0.0
 
 <mark>PixViewer</mark>是参照VS插件ImageWatch，基于**Qt**的开源图片查看工具，在[ImageViewer V1.1.0](https://github.com/xiaoguo1417/ImageViewer)的基础上，保留了图像像素灰度值查看、放大缩小及拖拽的基础功能，参照截图工具优化了图像ROI区域截取功能，增加了两张图像的对比功能。
+Releases中放置了PixViewer V2.0.0的安装版和绿色免安装版。
 
 # 1 基础功能
 
